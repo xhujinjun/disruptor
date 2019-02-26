@@ -58,10 +58,25 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class Disruptor<T>
 {
+    /**
+     * 环形缓冲区：核心数据结构
+     */
     private final RingBuffer<T> ringBuffer;
+    /**
+     * 消费者线程池
+     */
     private final Executor executor;
+    /**
+     * 消费者仓库
+     */
     private final ConsumerRepository<T> consumerRepository = new ConsumerRepository<>();
+    /**
+     *
+     */
     private final AtomicBoolean started = new AtomicBoolean(false);
+    /**
+     * 异常处理器
+     */
     private ExceptionHandler<? super T> exceptionHandler = new ExceptionHandlerWrapper<>();
 
     /**
